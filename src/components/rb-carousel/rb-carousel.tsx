@@ -49,6 +49,11 @@ export class RbCarousel {
 		this.resetAutoSlideInterval();
 	}
 
+	private selectActiveSlide(index): void {
+		this.activeSlideIndex = index;
+		this.resetAutoSlideInterval();
+	}
+
 	private getSlideClass(slideIndex): string {
 		let slideClass = `slide slide--${this.size}`;
 
@@ -77,7 +82,11 @@ export class RbCarousel {
 					<div class="slide-indicator-dot-container">
 						{
 							this.slideElements
-								.map((_, index) => <div class={index === this.activeSlideIndex ? 'dot dot--active' : 'dot'} />)
+								.map((_, index) => <div
+									role="button"
+									class={index === this.activeSlideIndex ? 'dot dot--active' : 'dot'}
+									onClick={() => this.selectActiveSlide(index)}
+								/>)
 						}
 					</div>
 				</div>
