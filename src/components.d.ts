@@ -7,10 +7,19 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface RbCarousel {
+        /**
+          * Time interval for slides automatic switching (in ms)
+         */
         "slideIntervalTime": number;
     }
     interface RbCarouselItem {
+        /**
+          * Image alt tag (for accessibility)
+         */
         "imageAlt"?: string;
+        /**
+          * Direct URL to the image
+         */
         "imageUrl": string;
     }
 }
@@ -34,10 +43,19 @@ declare global {
 }
 declare namespace LocalJSX {
     interface RbCarousel {
+        /**
+          * Time interval for slides automatic switching (in ms)
+         */
         "slideIntervalTime"?: number;
     }
     interface RbCarouselItem {
+        /**
+          * Image alt tag (for accessibility)
+         */
         "imageAlt"?: string;
+        /**
+          * Direct URL to the image
+         */
         "imageUrl"?: string;
     }
     interface IntrinsicElements {

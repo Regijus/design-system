@@ -6,15 +6,23 @@ import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 	shadow: true,
 })
 export class RbCarousel {
+	/**
+	 * Time interval for slides automatic switching (in ms)
+	 */
 	@Prop() slideIntervalTime: number;
 
-	@Element() host: HTMLDivElement;
+	@Element() host: HTMLRbCarouselElement;
 
 	@State() activeSlideIndex: number = 0;
 	@State() slideElements: Array<Element> = [];
 	@State() slideInterval: any;
 
-	resetAutoSlideInterval() {
+	componentWillRender() {
+		this.slideElements = Array.from(this.host.children);
+		this.resetAutoSlideInterval();
+	}
+
+	private resetAutoSlideInterval() {
 		if (!this.slideIntervalTime) {
 			return;
 		}
@@ -26,22 +34,13 @@ export class RbCarousel {
 		}, this.slideIntervalTime);
 	}
 
-	increaseActiveSlideIndex() {
+	private increaseActiveSlideIndex(): void {
 		this.activeSlideIndex = this.activeSlideIndex === this.slideElements.length - 1 ? 0 : this.activeSlideIndex + 1;
 		this.resetAutoSlideInterval();
 	}
 
-	decreaseActiveSlideIndex() {
+	private decreaseActiveSlideIndex(): void {
 		this.activeSlideIndex = this.activeSlideIndex === 0 ? this.slideElements.length - 1 : this.activeSlideIndex - 1;
-		this.resetAutoSlideInterval();
-	}
-
-	componentWillRender() {
-		if (!this.host?.children) {
-			return;
-		}
-
-		this.slideElements = this.host?.children ? Array.from(this.host.children) : [];
 		this.resetAutoSlideInterval();
 	}
 

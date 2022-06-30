@@ -5,7 +5,14 @@ import { Component, Prop, h, Host } from '@stencil/core';
 	styleUrl: 'rb-carousel-item.css',
 })
 export class RbCarousel {
+	/**
+	 * Direct URL to the image
+	 */
 	@Prop() imageUrl: string;
+
+	/**
+	 * Image alt tag (for accessibility)
+	 */
 	@Prop() imageAlt?: string;
 
 	render() {
