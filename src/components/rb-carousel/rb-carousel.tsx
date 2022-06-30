@@ -63,9 +63,7 @@ export class RbCarousel {
 		return (
 			<Host>
 				<button name="Previous slide" class="button button--left" onClick={() => this.decreaseActiveSlideIndex()}>
-					<div>
-						<span class="chevron chevron--left" />
-					</div>
+					<span class="chevron chevron--left" />
 				</button>
 				<div>
 					{
