@@ -1,2 +1,4 @@
 .global-wrapper {
+	display: flex;
+	justify-content: center;
 }

@@ -1,5 +1,5 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
-
+import { Size } from '../../utils/enums';
 @Component({
 	tag: 'rb-carousel',
 	styleUrl: 'rb-carousel.css',
@@ -10,6 +10,11 @@ export class RbCarousel {
 	 * Time interval for slides automatic switching (in ms)
 	 */
 	@Prop() slideIntervalTime: number;
+
+	/**
+	 * Size of the carousel images
+	 */
+	@Prop() size: Size = Size.Small;
 
 	@Element() host: HTMLRbCarouselElement;
 
@@ -44,10 +49,20 @@ export class RbCarousel {
 		this.resetAutoSlideInterval();
 	}
 
+	private getSlideClass(slideIndex): string {
+		let slideClass = `slide slide--${this.size}`;
+
+		if (slideIndex !== this.activeSlideIndex) {
+			slideClass += ' slide--inactive';
+		}
+
+		return slideClass;
+	}
+
 	render() {
 		return (
 			<Host>
-				<button class="button button--left" onClick={() => this.decreaseActiveSlideIndex()}>
+				<button name="Previous slide" class="button button--left" onClick={() => this.decreaseActiveSlideIndex()}>
 					Left
 				</button>
 				<div>
@@ -55,7 +70,7 @@ export class RbCarousel {
 						this.slideElements
 							.map((child, index) => <div
 									innerHTML={child.outerHTML}
-									class={index === this.activeSlideIndex ? 'slide' : 'slide slide--inactive'}
+									class={this.getSlideClass(index)}
 								/>
 							)
 					}
@@ -66,7 +81,7 @@ export class RbCarousel {
 						}
 					</div>
 				</div>
-				<button class="button button--right" onClick={() => this.increaseActiveSlideIndex()}>
+				<button name="Next slide" class="button button--right" onClick={() => this.increaseActiveSlideIndex()}>
 					Right
 				</button>
 			</Host>

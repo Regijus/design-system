@@ -5,8 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Size } from "./utils/enums";
 export namespace Components {
     interface RbCarousel {
+        /**
+          * Size of the carousel images
+         */
+        "size": Size;
         /**
           * Time interval for slides automatic switching (in ms)
          */
@@ -43,6 +48,10 @@ declare global {
 }
 declare namespace LocalJSX {
     interface RbCarousel {
+        /**
+          * Size of the carousel images
+         */
+        "size"?: Size;
         /**
           * Time interval for slides automatic switching (in ms)
          */
