@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
 
+		<link rel="stylesheet" href="/build/design-system.css">
     <script type="module" src="/build/design-system.esm.js"></script>
     <script nomodule src="/build/design-system.js"></script>
   </head>
   <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+	<div class="global-wrapper">
+		<rb-carousel slide-interval-time="5000">
+			<rb-carousel-item image-url="https://images.unsplash.com/photo-1656410212809-be4abff5af13"></rb-carousel-item>
+			<rb-carousel-item image-url="https://images.unsplash.com/photo-1655666581156-ff7c1735e333"></rb-carousel-item>
+			<rb-carousel-item image-url="https://images.unsplash.com/photo-1656414896156-bb1339254229"></rb-carousel-item>
+		</rb-carousel>
+	</div>
   </body>
 </html>

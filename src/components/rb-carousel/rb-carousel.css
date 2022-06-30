@@ -1,0 +1,47 @@
+:host {
+	display: flex;
+	align-items: center;
+}
+
+.button {
+	padding: 8px;
+}
+
+.button--left {
+	margin-right: 8px;
+}
+
+.button--right {
+	margin-left: 8px;
+}
+
+.slide--inactive {
+	display: none;
+}
+
+.slide-indicator-dot-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 8px;
+}
+
+.dot {
+	height: 12px;
+	width: 12px;
+	margin: 0 2px;
+	background-color: #EEE2DC;
+	border-radius: 50%;
+}
+
+.dot:first-child {
+	margin: 0 2px 0 0;
+}
+
+.dot:last-child {
+	margin: 0 0 0 2px;
+}
+
+.dot--active {
+	background-color: #8860D0;
+}

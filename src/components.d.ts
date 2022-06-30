@@ -6,56 +6,51 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface RbCarousel {
+        "slideIntervalTime": number;
+    }
+    interface RbCarouselItem {
+        "imageAlt"?: string;
+        "imageUrl": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRbCarouselElement extends Components.RbCarousel, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLRbCarouselElement: {
+        prototype: HTMLRbCarouselElement;
+        new (): HTMLRbCarouselElement;
+    };
+    interface HTMLRbCarouselItemElement extends Components.RbCarouselItem, HTMLStencilElement {
+    }
+    var HTMLRbCarouselItemElement: {
+        prototype: HTMLRbCarouselItemElement;
+        new (): HTMLRbCarouselItemElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "rb-carousel": HTMLRbCarouselElement;
+        "rb-carousel-item": HTMLRbCarouselItemElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface RbCarousel {
+        "slideIntervalTime"?: number;
+    }
+    interface RbCarouselItem {
+        "imageAlt"?: string;
+        "imageUrl"?: string;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "rb-carousel": RbCarousel;
+        "rb-carousel-item": RbCarouselItem;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "rb-carousel": LocalJSX.RbCarousel & JSXBase.HTMLAttributes<HTMLRbCarouselElement>;
+            "rb-carousel-item": LocalJSX.RbCarouselItem & JSXBase.HTMLAttributes<HTMLRbCarouselItemElement>;
         }
     }
 }
