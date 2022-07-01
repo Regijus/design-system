@@ -15,7 +15,7 @@ export class RbCarousel {
 	/**
 	 * Size of the carousel images
 	 */
-	@Prop() size: Size = Size.Small;
+	@Prop() size: Size = Size.Medium;
 
 	@Element() host: HTMLRbCarouselElement;
 

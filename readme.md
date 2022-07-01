@@ -19,3 +19,33 @@ After installing the project packages you can start the project.
 ```
 npm start
 ```
+
+# Design system components
+
+## Carousel
+
+Carousel component is named `rb-carousel` and is used along with `rb-carousel-item` components like this:
+```
+<rb-carousel>
+	<rb-carousel-item></rb-carousel-item>
+	<rb-carousel-item></rb-carousel-item>
+	...
+	<rb-carousel-item></rb-carousel-item>
+</rb-carousel>
+```
+
+### `rb-carousel` props
+
+- `size` - determines the size of the carousel component.
+  - Optional.
+  - Available values: `small`, `medium`, `large`.
+  - Default value: `medium`.
+- `slide-interval-time` - the time period at which the slides should auto-switch.
+  - Optional (the carousel will not auto-switch if value is not provided).
+
+### `rb-carousel-item` props
+
+- `image-url` - direct URL to the image that should be displayed.
+  - Required.
+- `image-alt` - text that is displayed as image's alt.
+  - Optional.
