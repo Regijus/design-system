@@ -17,7 +17,7 @@
 	transition: background-color 100ms linear;
 
 	&:hover {
-		background-color: #F3EFFA;
+		background-color: $color-very-light-blue;
 	}
 
 	&--left {
@@ -31,8 +31,8 @@
 
 .chevron {
 	display: inline-block;
-	border-right: 2px solid #8860D0;
-	border-bottom: 2px solid #8860D0;
+	border-right: 2px solid $color-primary-blue;
+	border-bottom: 2px solid $color-primary-blue;
 	width: 8px;
 	height: 8px;
 
@@ -76,7 +76,7 @@
 	height: 12px;
 	width: 12px;
 	margin: 0 2px;
-	background-color: #E7DFF5;
+	background-color: $color-light-blue;
 	border-radius: 50%;
 	transition: background-color 100ms linear;
 	cursor: pointer;
@@ -90,6 +90,6 @@
 	}
 
 	&--active {
-		background-color: #8860D0;
+		background-color: $color-primary-blue;
 	}
 }
