@@ -1,6 +1,9 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { Size } from '../../utils/enums';
 
+const INITIAL_PROGRESS_BAR_INTERVAL_STEP = 0;
+const MAX_PROGRESS_BAR_INTERVAL_STEPS = 100;
+
 @Component({
 	tag: 'rb-carousel',
 	styleUrl: 'rb-carousel.scss',
@@ -21,9 +24,11 @@ export class RbCarousel {
 
 	@State() activeSlideIndex: number = 0;
 	@State() slideElements: Array<Element> = [];
-	@State() slideInterval: any;
 
-	componentWillRender() {
+	@State() progressBarInterval: NodeJS.Timer;
+	@State() progressBarIntervalStep: number;
+
+	componentWillLoad() {
 		this.slideElements = Array.from(this.host.children);
 		this.resetAutoSlideInterval();
 	}
@@ -33,11 +38,19 @@ export class RbCarousel {
 			return;
 		}
 
-		clearInterval(this.slideInterval);
+		this.progressBarIntervalStep = INITIAL_PROGRESS_BAR_INTERVAL_STEP;
 
-		this.slideInterval = setInterval(() => {
-			this.increaseActiveSlideIndex();
-		}, this.slideIntervalTime);
+		const progressBarIntervalTime = this.slideIntervalTime / MAX_PROGRESS_BAR_INTERVAL_STEPS;
+
+		clearInterval(this.progressBarInterval);
+
+		this.progressBarInterval = setInterval(() => {
+			this.progressBarIntervalStep = this.progressBarIntervalStep + 1;
+
+			if (this.progressBarIntervalStep > MAX_PROGRESS_BAR_INTERVAL_STEPS) {
+				this.increaseActiveSlideIndex();
+			}
+		}, progressBarIntervalTime);
 	}
 
 	private increaseActiveSlideIndex(): void {
@@ -65,6 +78,16 @@ export class RbCarousel {
 		return slideClass;
 	}
 
+	private getProgressBarStyle(): { width: string } {
+		const widthPercentage = this.progressBarIntervalStep >= MAX_PROGRESS_BAR_INTERVAL_STEPS
+			? MAX_PROGRESS_BAR_INTERVAL_STEPS
+			: this.progressBarIntervalStep;
+
+		return {
+			width: `${widthPercentage}%`,
+		};
+	}
+
 	render() {
 		return (
 			<Host>
@@ -79,6 +102,15 @@ export class RbCarousel {
 									class={this.getSlideClass(index)}
 								/>
 							)
+					}
+					{
+						this.slideIntervalTime &&
+						<div class="progress-bar-container">
+							<div
+								class="progress-bar-fill"
+								style={this.getProgressBarStyle()}
+							/>
+						</div>
 					}
 					<div class="slide-indicator-dot-container">
 						{

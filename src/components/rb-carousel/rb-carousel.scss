@@ -93,3 +93,14 @@
 		background-color: $color-primary-blue;
 	}
 }
+
+.progress-bar-container {
+	width: 100%;
+	height: 4px;
+	background-color: $color-very-light-blue;
+}
+
+.progress-bar-fill {
+	height: inherit;
+	background-color: $color-primary-blue;
+}
