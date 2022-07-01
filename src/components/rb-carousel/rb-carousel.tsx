@@ -47,7 +47,7 @@ export class RbCarousel {
 		this.progressBarInterval = setInterval(() => {
 			this.progressBarIntervalStep = this.progressBarIntervalStep + 1;
 
-			if (this.progressBarIntervalStep > MAX_PROGRESS_BAR_INTERVAL_STEPS) {
+			if (this.progressBarIntervalStep === MAX_PROGRESS_BAR_INTERVAL_STEPS) {
 				this.increaseActiveSlideIndex();
 			}
 		}, progressBarIntervalTime);
@@ -81,7 +81,7 @@ export class RbCarousel {
 	private getProgressBarStyle(): { width: string } {
 		const widthPercentage = this.progressBarIntervalStep >= MAX_PROGRESS_BAR_INTERVAL_STEPS
 			? MAX_PROGRESS_BAR_INTERVAL_STEPS
-			: this.progressBarIntervalStep;
+			: this.progressBarIntervalStep + 1;
 
 		return {
 			width: `${widthPercentage}%`,
