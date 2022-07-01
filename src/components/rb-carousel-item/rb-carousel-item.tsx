@@ -2,7 +2,7 @@ import { Component, Prop, h, Host } from '@stencil/core';
 
 @Component({
 	tag: 'rb-carousel-item',
-	styleUrl: 'rb-carousel-item.css',
+	styleUrl: 'rb-carousel-item.scss',
 })
 export class RbCarousel {
 	/**

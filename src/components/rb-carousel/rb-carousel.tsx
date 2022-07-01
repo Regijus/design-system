@@ -3,7 +3,7 @@ import { Size } from '../../utils/enums';
 
 @Component({
 	tag: 'rb-carousel',
-	styleUrl: 'rb-carousel.css',
+	styleUrl: 'rb-carousel.scss',
 	shadow: true,
 })
 export class RbCarousel {
