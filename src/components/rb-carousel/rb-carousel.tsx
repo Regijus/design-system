@@ -1,5 +1,6 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { Size } from '../../utils/enums';
+
 @Component({
 	tag: 'rb-carousel',
 	styleUrl: 'rb-carousel.css',
@@ -22,21 +23,38 @@ export class RbCarousel {
 	@State() slideElements: Array<Element> = [];
 	@State() slideInterval: any;
 
+	@State() progressBar: HTMLElement;
+	@State() progressBarFillInterval: any;
+	@State() progressBarFillStepTime: number;
+
 	componentWillRender() {
 		this.slideElements = Array.from(this.host.children);
 		this.resetAutoSlideInterval();
 	}
 
-	private resetAutoSlideInterval() {
+	private setProgressBarElement(element): void {
+		if (!element) {
+			return;
+		}
+
+		this.progressBar = element as HTMLElement;
+	}
+
+	private resetAutoSlideInterval(): void {
 		if (!this.slideIntervalTime) {
 			return;
 		}
 
 		clearInterval(this.slideInterval);
+		clearInterval(this.progressBarFillInterval);
 
 		this.slideInterval = setInterval(() => {
 			this.increaseActiveSlideIndex();
 		}, this.slideIntervalTime);
+
+		this.progressBarFillInterval = setInterval(() => {
+			console.log(this.progressBar.style.width);
+		}, this.progressBarFillStepTime);
 	}
 
 	private increaseActiveSlideIndex(): void {
@@ -79,6 +97,9 @@ export class RbCarousel {
 								/>
 							)
 					}
+					<div class={this.slideIntervalTime ? 'progress-bar-container' : 'progress-bar-container progress-bar-container--inactive'}>
+						<div class="progress-bar-fill" ref={(el) => this.setProgressBarElement(el)}></div>
+					</div>
 					<div class="slide-indicator-dot-container">
 						{
 							this.slideElements
