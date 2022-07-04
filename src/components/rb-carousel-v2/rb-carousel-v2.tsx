@@ -30,10 +30,11 @@ export class RbCarousel {
 	@State() progressBarInterval: NodeJS.Timer;
 	@State() progressBarIntervalStep: number;
 	@State() isAutoSlideSwitchingActive: boolean;
+	@State() isAutoSlideSwitchingPaused: boolean;
 
 	@Listen('carouselItemClicked')
-	carouselItemClickedHandler(event: CustomEvent<boolean>) {
-		console.log('Carousel V2 item clicked event fired to target:', event.target);
+	carouselItemClickedHandler() {
+		this.toggleCarouselPause();
 	}
 
 	componentWillLoad() {
@@ -41,9 +42,17 @@ export class RbCarousel {
 		this.resetAutoSlideInterval();
 	}
 
+	private toggleCarouselPause() {
+		this.isAutoSlideSwitchingPaused = !this.isAutoSlideSwitchingPaused;
+	}
+
 	private resetAutoSlideInterval(): void {
-		if (!this.slideIntervalTime || this.items.length <= 1) {
+		if (!this.isAutoSlideSwitchingActive) {
 			return;
+		}
+
+		if (this.isAutoSlideSwitchingPaused) {
+			this.toggleCarouselPause();
 		}
 
 		this.progressBarIntervalStep = INITIAL_PROGRESS_BAR_INTERVAL_STEP;
@@ -53,6 +62,10 @@ export class RbCarousel {
 		clearInterval(this.progressBarInterval);
 
 		this.progressBarInterval = setInterval(() => {
+			if (this.isAutoSlideSwitchingPaused) {
+				return;
+			}
+
 			this.progressBarIntervalStep = this.progressBarIntervalStep + 1;
 
 			if (this.progressBarIntervalStep === MAX_PROGRESS_BAR_INTERVAL_STEPS) {
