@@ -1,6 +1,6 @@
 {
   "name": "rb-design-system-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "RB Design System for Vue",
   "author": "Regijus <regijusb@gmail.com>",
   "homepage": "https://github.com/Regijus/design-system#readme",
@@ -31,6 +31,6 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "rb-design-system": "^0.0.1"
+    "rb-design-system": "^0.0.2"
   }
 }
