@@ -31,9 +31,9 @@ export class RbCarousel {
 	@State() progressBarIntervalStep: number;
 	@State() isAutoSlideSwitchingActive: boolean;
 
-	@Listen('carouselItemRendered')
-	carouselItemRenderedHandler(event: CustomEvent<boolean>) {
-		console.log('Carousel V2 - item rendered, event target:', event.target);
+	@Listen('carouselItemClicked')
+	carouselItemClickedHandler(event: CustomEvent<boolean>) {
+		console.log('Carousel V2 item clicked event fired to target:', event.target);
 	}
 
 	componentWillLoad() {

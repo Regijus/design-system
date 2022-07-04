@@ -92,7 +92,7 @@ declare namespace LocalJSX {
           * Direct URL to the image
          */
         "imageUrl"?: string;
-        "onCarouselItemRendered"?: (event: RbCarouselItemCustomEvent<boolean>) => void;
+        "onCarouselItemClicked"?: (event: RbCarouselItemCustomEvent<boolean>) => void;
     }
     interface RbCarouselV2 {
         /**

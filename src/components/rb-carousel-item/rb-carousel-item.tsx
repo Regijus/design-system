@@ -15,16 +15,16 @@ export class RbCarousel {
 	 */
 	@Prop() imageAlt?: string;
 
-	@Event() carouselItemRendered: EventEmitter<boolean>;
+	@Event() carouselItemClicked: EventEmitter<boolean>;
 
-	componentDidRender() {
-		this.carouselItemRendered.emit(true);
+	private emitCarouselItemClickedEvent() {
+		this.carouselItemClicked.emit(true);
 	}
 
 	render() {
 		return (
 			<Host>
-				<img src={this.imageUrl} alt={this.imageAlt} class="image" />
+				<img src={this.imageUrl} alt={this.imageAlt} class="image" onClick={() => this.emitCarouselItemClickedEvent()} />
 			</Host>
 		)
 	}
