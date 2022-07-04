@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Size } from "./utils/enums";
+import { CarouselItem } from "./utils/types";
 export namespace Components {
     interface RbCarousel {
         /**
@@ -27,6 +28,20 @@ export namespace Components {
          */
         "imageUrl": string;
     }
+    interface RbCarouselV2 {
+        /**
+          * Items to display
+         */
+        "items": Array<CarouselItem>;
+        /**
+          * Size of the carousel images
+         */
+        "size": Size;
+        /**
+          * Time interval for slides automatic switching (in ms)
+         */
+        "slideIntervalTime": number;
+    }
 }
 declare global {
     interface HTMLRbCarouselElement extends Components.RbCarousel, HTMLStencilElement {
@@ -41,9 +56,16 @@ declare global {
         prototype: HTMLRbCarouselItemElement;
         new (): HTMLRbCarouselItemElement;
     };
+    interface HTMLRbCarouselV2Element extends Components.RbCarouselV2, HTMLStencilElement {
+    }
+    var HTMLRbCarouselV2Element: {
+        prototype: HTMLRbCarouselV2Element;
+        new (): HTMLRbCarouselV2Element;
+    };
     interface HTMLElementTagNameMap {
         "rb-carousel": HTMLRbCarouselElement;
         "rb-carousel-item": HTMLRbCarouselItemElement;
+        "rb-carousel-v2": HTMLRbCarouselV2Element;
     }
 }
 declare namespace LocalJSX {
@@ -67,9 +89,24 @@ declare namespace LocalJSX {
          */
         "imageUrl"?: string;
     }
+    interface RbCarouselV2 {
+        /**
+          * Items to display
+         */
+        "items"?: Array<CarouselItem>;
+        /**
+          * Size of the carousel images
+         */
+        "size"?: Size;
+        /**
+          * Time interval for slides automatic switching (in ms)
+         */
+        "slideIntervalTime"?: number;
+    }
     interface IntrinsicElements {
         "rb-carousel": RbCarousel;
         "rb-carousel-item": RbCarouselItem;
+        "rb-carousel-v2": RbCarouselV2;
     }
 }
 export { LocalJSX as JSX };
@@ -78,6 +115,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "rb-carousel": LocalJSX.RbCarousel & JSXBase.HTMLAttributes<HTMLRbCarouselElement>;
             "rb-carousel-item": LocalJSX.RbCarouselItem & JSXBase.HTMLAttributes<HTMLRbCarouselItemElement>;
+            "rb-carousel-v2": LocalJSX.RbCarouselV2 & JSXBase.HTMLAttributes<HTMLRbCarouselV2Element>;
         }
     }
 }

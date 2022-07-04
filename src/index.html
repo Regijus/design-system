@@ -11,20 +11,59 @@
   </head>
   <body>
 	<div class="global-wrapper">
-		<rb-carousel size="medium" slide-interval-time="3000">
+		<!-- Carousel component test -->
+		<rb-carousel size="medium" slide-interval-time="3000" class="global-carousel-v1">
 			<rb-carousel-item
-				image-url="https://images.unsplash.com/photo-1656410212809-be4abff5af13"
-				alt="Lake with mountains in the background"
+				image-url="https://images.unsplash.com/photo-1511300636408-a63a89df3482?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+				image-alt="Mountainy island in the middle of a sea"
 			></rb-carousel-item>
 			<rb-carousel-item
-				image-url="https://images.unsplash.com/photo-1655666581156-ff7c1735e333"
-				alt="Cliffs with the background of the ocean"
+				image-url="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+				image-alt="Mountains with a parking below them"
 			></rb-carousel-item>
 			<rb-carousel-item
-				image-url="https://images.unsplash.com/photo-1656414896156-bb1339254229"
-				alt="Lake with a boat with the background of the mountains"
+				image-url="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+				image-alt="Snowy mountains with a comet falling down in the night sky"
+			></rb-carousel-item>
+			<rb-carousel-item
+				image-url="https://images.unsplash.com/photo-1576225410873-a28b2a79fd93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+				image-alt="Bridge with a big fog above it"
 			></rb-carousel-item>
 		</rb-carousel>
+
+		<!-- Carousel component V2 test -->
+		<rb-carousel-v2 size="medium" slide-interval-time="3000" id="rb-carousel-v2"></rb-carousel-v2>
 	</div>
+
+	<script>
+		const ITEMS = [
+			{
+				imageUrl: 'https://images.unsplash.com/photo-1511300636408-a63a89df3482?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
+				imageAlt: 'Mountainy island in the middle of a sea',
+			},
+			{
+				imageUrl: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
+				imageAlt: 'Mountains with a parking below them',
+			},
+			{
+				imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
+				imageAlt: 'Snowy mountains with a comet falling down in the night sky',
+			},
+			{
+				imageUrl: 'https://images.unsplash.com/photo-1576225410873-a28b2a79fd93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
+				imageAlt: 'Bridge with a big fog above it',
+			}
+		];
+
+		function addItemsToV2Carousel(items) {
+			const v2CarouselElement = document.getElementById('rb-carousel-v2');
+
+			if (v2CarouselElement) {
+				v2CarouselElement.items = items;
+			}
+		}
+
+		addItemsToV2Carousel(ITEMS);
+	</script>
   </body>
 </html>

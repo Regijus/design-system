@@ -1,12 +1,13 @@
-import { Component, Element, Host, Prop, State, h } from '@stencil/core';
+import { Component, Host, Prop, State, h } from '@stencil/core';
 import { Size } from '../../utils/enums';
+import { CarouselItem } from '../../utils/types';
 
 const INITIAL_PROGRESS_BAR_INTERVAL_STEP = 0;
 const MAX_PROGRESS_BAR_INTERVAL_STEPS = 100;
 
 @Component({
-	tag: 'rb-carousel',
-	styleUrl: 'rb-carousel.scss',
+	tag: 'rb-carousel-v2',
+	styleUrl: 'rb-carousel-v2.scss',
 	shadow: true,
 })
 export class RbCarousel {
@@ -20,23 +21,24 @@ export class RbCarousel {
 	 */
 	@Prop() size: Size = Size.Medium;
 
-	@Element() host: HTMLRbCarouselElement;
+	/**
+	 * Items to display
+	 */
+	@Prop() items: Array<CarouselItem> = [];
 
 	@State() activeSlideIndex: number = 0;
-	@State() slideElements: Array<Element> = [];
 
 	@State() progressBarInterval: NodeJS.Timer;
 	@State() progressBarIntervalStep: number;
 	@State() isAutoSlideSwitchingActive: boolean;
 
 	componentWillLoad() {
-		this.slideElements = Array.from(this.host.children);
-		this.isAutoSlideSwitchingActive =  this.slideIntervalTime && this.slideElements.length > 1;
+		this.isAutoSlideSwitchingActive = this.slideIntervalTime && this.items.length > 1;
 		this.resetAutoSlideInterval();
 	}
 
 	private resetAutoSlideInterval(): void {
-		if (!this.isAutoSlideSwitchingActive) {
+		if (!this.slideIntervalTime || this.items.length <= 1) {
 			return;
 		}
 
@@ -56,12 +58,12 @@ export class RbCarousel {
 	}
 
 	private increaseActiveSlideIndex(): void {
-		this.activeSlideIndex = this.activeSlideIndex === this.slideElements.length - 1 ? 0 : this.activeSlideIndex + 1;
+		this.activeSlideIndex = this.activeSlideIndex === this.items.length - 1 ? 0 : this.activeSlideIndex + 1;
 		this.resetAutoSlideInterval();
 	}
 
 	private decreaseActiveSlideIndex(): void {
-		this.activeSlideIndex = this.activeSlideIndex === 0 ? this.slideElements.length - 1 : this.activeSlideIndex - 1;
+		this.activeSlideIndex = this.activeSlideIndex === 0 ? this.items.length - 1 : this.activeSlideIndex - 1;
 		this.resetAutoSlideInterval();
 	}
 
@@ -98,9 +100,10 @@ export class RbCarousel {
 				</button>
 				<div class={`slide-container--${this.size}`}>
 					{
-						this.slideElements
-							.map((child, index) => <div
-									innerHTML={child.outerHTML}
+						this.items
+							.map((item, index) => <rb-carousel-item
+									image-url={item.imageUrl}
+									image-alt={item.imageAlt}
 									class={this.getSlideClass(index)}
 								/>
 							)
@@ -116,7 +119,7 @@ export class RbCarousel {
 					}
 					<div class="slide-indicator-dot-container">
 						{
-							this.slideElements
+							this.items
 								.map((_, index) => <div
 									role="button"
 									class={index === this.activeSlideIndex ? 'dot dot--active' : 'dot'}
