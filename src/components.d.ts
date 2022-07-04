@@ -20,7 +20,7 @@ export namespace Components {
     }
     interface RbCarouselItem {
         /**
-          * Image alt tag (for accessibility)
+          * Image alt tag
          */
         "imageAlt"?: string;
         /**
@@ -42,6 +42,10 @@ export namespace Components {
          */
         "slideIntervalTime": number;
     }
+}
+export interface RbCarouselItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRbCarouselItemElement;
 }
 declare global {
     interface HTMLRbCarouselElement extends Components.RbCarousel, HTMLStencilElement {
@@ -81,13 +85,14 @@ declare namespace LocalJSX {
     }
     interface RbCarouselItem {
         /**
-          * Image alt tag (for accessibility)
+          * Image alt tag
          */
         "imageAlt"?: string;
         /**
           * Direct URL to the image
          */
         "imageUrl"?: string;
+        "onCarouselItemRendered"?: (event: RbCarouselItemCustomEvent<boolean>) => void;
     }
     interface RbCarouselV2 {
         /**

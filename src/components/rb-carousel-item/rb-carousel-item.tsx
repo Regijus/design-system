@@ -1,4 +1,4 @@
-import { Component, Prop, h, Host } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, h, Host } from '@stencil/core';
 
 @Component({
 	tag: 'rb-carousel-item',
@@ -11,9 +11,15 @@ export class RbCarousel {
 	@Prop() imageUrl: string;
 
 	/**
-	 * Image alt tag (for accessibility)
+	 * Image alt tag
 	 */
 	@Prop() imageAlt?: string;
+
+	@Event() carouselItemRendered: EventEmitter<boolean>;
+
+	componentDidRender() {
+		this.carouselItemRendered.emit(true);
+	}
 
 	render() {
 		return (

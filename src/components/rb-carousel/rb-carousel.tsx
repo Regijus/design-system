@@ -1,4 +1,4 @@
-import { Component, Element, Host, Prop, State, h } from '@stencil/core';
+import { Component, Element, Host, Listen, Prop, State, h } from '@stencil/core';
 import { Size } from '../../utils/enums';
 
 const INITIAL_PROGRESS_BAR_INTERVAL_STEP = 0;
@@ -24,10 +24,14 @@ export class RbCarousel {
 
 	@State() activeSlideIndex: number = 0;
 	@State() slideElements: Array<Element> = [];
-
 	@State() progressBarInterval: NodeJS.Timer;
 	@State() progressBarIntervalStep: number;
 	@State() isAutoSlideSwitchingActive: boolean;
+
+	@Listen('carouselItemRendered')
+	carouselItemRenderedHandler(event: CustomEvent<boolean>) {
+		console.log('Carousel - item rendered, event target:', event.target);
+	}
 
 	componentWillLoad() {
 		this.slideElements = Array.from(this.host.children);
